@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ForegroundService</string>
+    <string name="download_file">Download file</string>
+</resources>
