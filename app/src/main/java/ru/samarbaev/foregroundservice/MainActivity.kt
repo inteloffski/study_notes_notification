@@ -2,11 +2,11 @@ package ru.samarbaev.foregroundservice
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.Context
+import android.app.PendingIntent
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 
@@ -57,6 +57,10 @@ class MainActivity : AppCompatActivity() {
             .setSmallIcon(R.drawable.ic_launcher_background)
             .setContentTitle("textTitle")
             .setContentText("textContent")
+            // setContentIntent(notifyPendingIntent()) - параметр, который открывает приложение на заданой активити
+            .setContentIntent(notifyPendingIntent())
+            // setAutoCancel(true) - параметр, который автоматически удаляет уведомление, по котором нажал пользователь
+            .setAutoCancel(true)
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
@@ -73,5 +77,14 @@ class MainActivity : AppCompatActivity() {
 
     private fun getNotificationManager(): NotificationManagerCompat {
         return NotificationManagerCompat.from(this)
+    }
+
+    private fun notifyPendingIntent(): PendingIntent {
+        val intent = Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+
+        return PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+
     }
 }
