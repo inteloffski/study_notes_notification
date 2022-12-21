@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ForegroundService</string>
     <string name="download_file">Download file</string>
+    <string name="paste_to_link_for_download_file">Paste to link</string>
 </resources>
